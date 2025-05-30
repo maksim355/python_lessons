@@ -1,0 +1,258 @@
+my_tuple = 'Mike', 'Moscow', 'Teacher'
+name, city, proffesion = my_tuple
+# print(name)
+# print(city)
+# print(proffesion)
+my_tuple = (1, 2, 3, 4, 5, 6)
+first, *rest, last = my_tuple
+print(first)
+print(rest)
+print(last)
+foo ='abcd'
+f, *m, l = foo
+print(f, m, l)
+my_dict = {'key_1': 1, 'key_2': 2}
+my_dict = dict(key_1=1, key_2=2)
+value = my_dict['key_1']
+
+
+my_dict['new_key'] = 3
+del my_dict['key_1']
+# key 1
+removed_value = my_dict.pop('key_2')
+# key 2
+last_value = my_dict.popitem()
+# last_value
+my_dict = {'key_1': 1, 'key': 2}
+
+for k in my_dict.keys():
+    print(k)
+for v in my_dict.values():
+    print(v)
+for k, v in my_dict.items():
+    print(k, v)
+my_list = [1, 2, 3]
+other_list = my_list.copy()
+other_list = list(my_list)
+other_list[0] = 4
+print(my_list[0])
+my_set = {1, 2, 3, 4}
+my_set = set([1, 2, 3,  4])
+my_set = {1, 1, 2, 2}
+print(my_set)
+unique = set('arnold shaz')
+print(unique)
+my_set = {1, 2}
+my_set.add(3)
+print(my_set)
+my_set = {1, 2, 3, 4}
+my_set.remove(3)
+print(my_set)
+my_set.discard(3)
+my_set.discard(2)
+print(my_set)
+removed_data = my_set.pop()
+print(removed_data)  
+my_set.clear()
+print(my_set)
+evens = {2, 8, 10} 
+odds = {1, 3, 7} 
+primes = {2, 3, 5} 
+union = evens.union(odds)
+print(union)
+intesection = evens.intersection(primes)
+print(intesection)
+my_string = 'Hello \'world\' \\'
+print(my_string)
+my_string = '  Hello, world?  '
+no_spaces = my_string.strip()
+print(no_spaces)
+to_list = my_string.split("l")
+print(to_list)
+first_string = 'Hello, world?'
+second_string = 'Display beautifully'
+collection = [first_string, second_string]
+for s in collection:
+    print(s.ljust(70, '$'))
+from datetime import datetime 
+today = "Today's date is {:%Y-%m-%d %H:%M}".format(datetime.now())
+print(today)
+my_string = 'Hello, world?'
+
+
+
+my_string.startswith('Hello')
+my_string.endswith('world?')
+my_string.find('ell')
+print(my_string.count('q'))
+replaced = my_string.replace('Hello', 'Bye bye')
+print(replaced)
+unsorted_list = [(10, -1), (5, 12), (-5, 2)]
+
+sorted_list = sorted(unsorted_list, key=lambda x: x[0])
+print(sorted_list)
+
+
+sorted_list = sorted(unsorted_list, key=lambda x: x[1])
+print(sorted_list)
+my_string = '12345'
+to_list_of_ints = list(map(lambda x: int(x), my_string))
+print(to_list_of_ints)
+convert_list = list(map(lambda x: int(x), my_list))
+print(convert_list)
+filter_list = list(filter(lambda x: type(x) is str, my_list))
+print(filter_list)
+
+from functools import reduce
+my_list = [1, 2, 3, 4, 5]
+reduced_list = reduce(lambda x, y: x + y, my_list)
+print(reduced_list)
+
+
+generated_list = [i for i in range(10)]
+print(generated_list)
+
+
+squared_list = [i ** 2 for i in range(10)]
+print(squared_list)
+
+only_evens = [i ** 2 for i in range(10) if i ** 2 % 2 == 0]
+print(only_evens)
+
+result = [33 for i in 'приветик' if i == 'и']
+print(result)
+
+some_value = True
+my_ternary = 10 if some_value else 20
+print(my_ternary)
+
+
+
+
+
+def my_func(a):
+    print(a)
+
+my_func('Hello')
+def my_func(a, b, c):
+    print(a, b, c)
+
+
+my_func('Hello', 'World', '!!!' )
+
+
+my_func(a='First', b='Second', c='Third')
+my_func(b='Second', c='Third', a='First')
+
+
+my_func('First', b='Second', c='Third')
+
+def my_func(a, b, *args, **kwargs):
+    print(a, b)
+    print(args)
+    print(kwargs)
+my_func(1, 2, 3, 4, 5, foo=6, bar=7)
+
+
+def my_func(a, b, c):
+    print(a, b, c)
+
+
+some_dict = {'a': 1, 'b': 2, 'c': 3}
+my_func(**some_dict)
+
+
+def my_func():
+    global number
+    x = number
+
+    number = 10
+    print(x == number)
+
+number = 5
+my_func()
+ 
+def decorator(func):
+    def wrapper():
+        print('Before')
+        func()
+        print('After')
+    return wrapper
+
+@decorator
+def print_name():
+    print('Mike')
+    
+
+print_name()
+
+def square_decorator(func):
+    def wrapper(*args, **kwargs):
+        result = func(*args, **kwargs)
+        return  result * result
+    return wrapper
+
+@square_decorator
+def add_some(x):
+    return x + 5
+print(add_some(10))
+
+def repeater(times):
+    def decorator_repeat(func):
+        def wrapper(*args, **kwargs):
+            for _ in range(times):
+                result = func(*args, **kwargs)
+            return result
+        return wrapper
+    return decorator_repeat
+
+@repeater(times=15)
+def say_hello():
+    print('Hello, world!')
+
+say_hello()
+
+def counter(func):
+    def wrapper(*args, **kwargs):
+        func.__dict__['count'] += 1
+        print(f"This function called: {func.__dict__['count']} times")
+        result = func(*args, **kwargs)
+        return result
+    func.__dict__['count'] = 0
+    return wrapper
+
+@counter
+def some_func():
+    print('Hello')
+
+
+some_func()
+some_func()
+some_func()
+
+from collections import Counter
+
+my_string = 'aaaabbbccccdddd'
+
+my_counter = Counter(my_string)
+print(my_counter)
+print(my_counter.most_common(1))
+
+my_list = ['a', 'b', 'c']
+
+for i in my_list:
+    print(i)
+
+for i in enumerate(my_list):
+    print(i[0], i[1])
+
+def my_gen():
+    yield 1
+    yield 2
+    yield 3
+gen = my_gen()
+
+for i in gen:
+    print(i)
+
+
